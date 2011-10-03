@@ -64,4 +64,35 @@
     
 }
 
+- (void) testPerformance
+{
+    NSString *lastTimeString=nil;
+    CFAbsoluteTime startRegexLoop = CFAbsoluteTimeGetCurrent();
+    for (uint i=0; i< 1000; i++) {
+        if (lastTimeString) {
+            NSString *currentNumberString=[NSString stringWithFormat:@"%u",i];
+            NSString *replacementString=[lastTimeString stringByReplacingRegexPattern:@"[0-9][0-9]*" withString:currentNumberString caseInsensitive:NO];
+            STAssertEqualObjects(replacementString, currentNumberString, @"regex replace failed");
+        }
+        lastTimeString=[NSString stringWithFormat:@"%u",i];
+        i++;
+    }
+    CFAbsoluteTime endRegexLoop = CFAbsoluteTimeGetCurrent();
+    NSLog(@"1000 regex replaces took %lf seconds",(endRegexLoop-startRegexLoop));
+    CFAbsoluteTime startCreateStringLoop = CFAbsoluteTimeGetCurrent();
+    for (uint i=0; i< 1000; i++) {
+        if (lastTimeString) {
+            NSString *currentNumberString=[NSString stringWithFormat:@"%u",i];
+            NSString *replacementString=[NSString stringWithFormat:@"%u",i];
+            STAssertEqualObjects(replacementString, currentNumberString, @"string creation failed");
+        }
+        lastTimeString=[NSString stringWithFormat:@"%u",i];
+        i++;
+    }
+    CFAbsoluteTime endCreateStringLoop = CFAbsoluteTimeGetCurrent();
+    NSLog(@"1000 String creations took %lf seconds",(endCreateStringLoop-startCreateStringLoop));
+    STAssertEqualsWithAccuracy((10*(endCreateStringLoop-startCreateStringLoop)), (endRegexLoop-startRegexLoop), 0.1, @"Regex took way too much longer");
+
+}
+
 @end
