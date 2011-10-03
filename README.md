@@ -1,1 +1,3 @@
 __RegexOnNSString__ is a Category on NSString that gives you access to NSRegularExpression without having to declare a separate object and wade through the documentation on the different parameters that 95+% of the time, you're never going to need anyway.
+
+There are Unit tests in the iPhone and OSX examples, but there aren't example Apps, yet (hopefully if you look at the category interface and the Unit tests, the usage should be obvious - if not, I failed and you should yell at me).
