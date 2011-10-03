@@ -83,15 +83,16 @@
     for (uint i=0; i< 1000; i++) {
         if (lastTimeString) {
             NSString *currentNumberString=[NSString stringWithFormat:@"%u",i];
-            NSString *replacementString=[NSString stringWithFormat:@"%u",i];
-            STAssertEqualObjects(replacementString, currentNumberString, @"string creation failed");
+            NSString *replacementString=[lastTimeString stringByReplacingOccurrencesOfString:lastTimeString withString:currentNumberString];
+            STAssertEqualObjects(replacementString, currentNumberString, @"string replace failed");
         }
         lastTimeString=[NSString stringWithFormat:@"%u",i];
         i++;
     }
     CFAbsoluteTime endCreateStringLoop = CFAbsoluteTimeGetCurrent();
-    NSLog(@"1000 String creations took %lf seconds",(endCreateStringLoop-startCreateStringLoop));
-    STAssertEqualsWithAccuracy((10*(endCreateStringLoop-startCreateStringLoop)), (endRegexLoop-startRegexLoop), 0.1, @"Regex took way too much longer");
+    NSLog(@"1000 String replaces took %lf seconds",(endCreateStringLoop-startCreateStringLoop));
+    NSLog(@"Simple String substitution %f times faster",((endRegexLoop-startRegexLoop)/(endCreateStringLoop-startCreateStringLoop)));
+    STAssertTrue((((endRegexLoop-startRegexLoop)/(endCreateStringLoop-startCreateStringLoop)) < 15), @"Regex took way too much longer");
 }
 
 
