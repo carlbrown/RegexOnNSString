@@ -10,7 +10,7 @@
 
 @implementation NSString (PDRegex)
 
--(NSString *) stringByreplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement caseInsensitive:(BOOL)ignoreCase {
+-(NSString *) stringByReplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement caseInsensitive:(BOOL)ignoreCase {
     
     NSUInteger options=0;
     if (ignoreCase) {

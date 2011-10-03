@@ -10,6 +10,6 @@
 
 @interface NSString (PDRegex)
 
--(NSString *) stringByreplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement caseInsensitive:(BOOL) ignoreCase;
+-(NSString *) stringByReplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement caseInsensitive:(BOOL) ignoreCase;
 
 @end
