@@ -1,0 +1,1 @@
+__RegexOnNSString__ is a Category on NSString that gives you access to NSRegularExpression without having to declare a separate object and wade through the documentation on the different parameters that 95+% of the time, you're never going to need anyway.
