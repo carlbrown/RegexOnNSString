@@ -18,6 +18,10 @@
     }
     NSError *error=nil;
     NSRegularExpression *pattern = [NSRegularExpression regularExpressionWithPattern:regex options:options error:&error];
+    if (error) {
+        NSLog(@"Error creating Regex: %@",[error description]);
+        return nil;
+    }
     
     NSString *retVal= [pattern stringByReplacingMatchesInString:self options:0 range:NSMakeRange(0, [self length]) withTemplate:replacement];
     return retVal;

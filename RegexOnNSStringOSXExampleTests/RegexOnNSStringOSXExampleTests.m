@@ -48,4 +48,10 @@
     
 }
 
+-(void) testBadRegex
+{
+    
+    STAssertNil([@"test" stringByreplacingRegexPattern:@"[sdf" withString:@"" caseInsensitive:NO], @"Should have returned error since square brackets ([) unmatched");
+}
+
 @end
