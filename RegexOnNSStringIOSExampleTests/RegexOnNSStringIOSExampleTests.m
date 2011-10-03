@@ -7,6 +7,7 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "NSString+PDRegex.h"
 
 @interface RegexOnNSStringIOSExampleTests : SenTestCase
 
@@ -28,9 +29,39 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testLiteralReplace
 {
-    STFail(@"Unit tests are not implemented yet in RegexOnNSStringIOSExampleTests");
+    
+    NSString *originalString = @"Unit tests are not implemented yet in RegexOnNSStringIOSExampleTests";
+    NSString *newString = [originalString stringByreplacingRegexPattern:@" not implemented yet " withString:@" implemented " caseInsensitive:NO];
+    
+    STAssertEqualObjects(newString, @"Unit tests are implemented in RegexOnNSStringIOSExampleTests", @"Regex replace failed");
+    
+}
+- (void)testWildCardReplace
+{
+    
+    NSString *originalString = @"Unit tests are not implemented yet in RegexOnNSStringIOSExampleTests";
+    NSString *newString = [originalString stringByreplacingRegexPattern:@" not.*yet " withString:@" implemented " caseInsensitive:NO];
+    
+    STAssertEqualObjects(newString, @"Unit tests are implemented in RegexOnNSStringIOSExampleTests", @"Regex replace failed");
+    
+}
+
+-(void) testBadRegex
+{
+    
+    STAssertNil([@"test" stringByreplacingRegexPattern:@"[sdf" withString:@"" caseInsensitive:NO], @"Should have returned error since square brackets ([) unmatched");
+}
+
+- (void)testCaptureReplace
+{
+    
+    NSString *originalString = @"Unit tests are not implemented yet in RegexOnNSStringIOSExampleTests";
+    NSString *newString = [originalString stringByreplacingRegexPattern:@"^.*(Re.*)Tests.*$" withString:@"$1" caseInsensitive:NO];
+    
+    STAssertEqualObjects(newString, @"RegexOnNSStringIOSExample", @"Regex replace via parenthesis failed");
+    
 }
 
 @end

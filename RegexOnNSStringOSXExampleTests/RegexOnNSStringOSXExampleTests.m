@@ -54,4 +54,14 @@
     STAssertNil([@"test" stringByreplacingRegexPattern:@"[sdf" withString:@"" caseInsensitive:NO], @"Should have returned error since square brackets ([) unmatched");
 }
 
+- (void)testCaptureReplace
+{
+    
+    NSString *originalString = @"Unit tests are not implemented yet in RegexOnNSStringOSXExampleTests";
+    NSString *newString = [originalString stringByreplacingRegexPattern:@"^.*(Re.*)Tests.*$" withString:@"$1" caseInsensitive:NO];
+    
+    STAssertEqualObjects(newString, @"RegexOnNSStringOSXExample", @"Regex replace via parenthesis failed");
+    
+}
+
 @end
