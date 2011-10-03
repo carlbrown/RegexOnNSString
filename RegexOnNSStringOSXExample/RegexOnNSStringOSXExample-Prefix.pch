@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'RegexOnNSString' target in the 'RegexOnNSString' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
