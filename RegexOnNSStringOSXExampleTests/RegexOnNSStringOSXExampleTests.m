@@ -74,6 +74,41 @@
     
 }
 
+
+- (void)testGroupExtract
+{
+    
+    NSString *originalString = @"Unit tests are not implemented yet in RegexOnNSStringOSXExampleTests";
+    NSArray *matches = [originalString 
+                        stringsByExtractingGroupsUsingRegexPattern:@"^Unit *(t[a-z][a-z]*) [^y]*([a-z]*)"
+                        caseInsensitive:NO treatAsOneLine:NO];
+    STAssertEquals((uint) [matches count], (uint) 2, @"Should be 2 strings since there are 2 sets of parens");
+    NSString *firstMatch=[matches objectAtIndex:0];
+    NSString *secondMatch=[matches objectAtIndex:1];
+    
+    STAssertEqualObjects(firstMatch, @"tests", @"Regex extract via parenthesis failed");
+    STAssertEqualObjects(secondMatch, @"yet", @"Regex extract via parenthesis failed");
+    
+}
+
+- (void)testNestedGroupExtract
+{
+    
+    NSString *originalString = @"Unit tests are not implemented yet in RegexOnNSStringOSXExampleTests";
+    NSArray *matches = [originalString 
+                        stringsByExtractingGroupsUsingRegexPattern:@"^Unit *(t[a-z][a-z]*) [^y]*(imp[^y]*([a-z]*))"
+                        caseInsensitive:NO treatAsOneLine:NO];
+    STAssertEquals((uint) [matches count], (uint) 3, @"Should be 3 strings since there are 3 sets of parens");
+    NSString *firstMatch=[matches objectAtIndex:0];
+    NSString *secondMatch=[matches objectAtIndex:1];
+    NSString *thirdMatch=[matches objectAtIndex:2];
+    
+    STAssertEqualObjects(firstMatch, @"tests", @"Regex extract via parenthesis failed");
+    STAssertEqualObjects(secondMatch, @"implemented yet", @"Regex extract via parenthesis failed");
+    STAssertEqualObjects(thirdMatch, @"yet", @"Regex extract via parenthesis failed");
+    
+}
+
 - (void) testPerformance
 {
     NSString *lastTimeString=nil;
