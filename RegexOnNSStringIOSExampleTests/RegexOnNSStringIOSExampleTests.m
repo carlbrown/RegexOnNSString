@@ -64,6 +64,18 @@
     
 }
 
+- (void)testMultiLineReplace
+{
+    
+    NSString *originalString = @"Unit tests are not \nimplemented\n yet in RegexOnNSStringIOSExampleTests";
+    NSString *newString = [originalString stringByReplacingRegexPattern:@" not.*yet " withString:@" implemented " caseInsensitive:NO treatAsOneLine:YES];
+    
+    STAssertEqualObjects(newString, @"Unit tests are implemented in RegexOnNSStringIOSExampleTests", @"Regex replace failed");
+    
+}
+
+
+
 - (void) testPerformance
 {
     NSString *lastTimeString=nil;

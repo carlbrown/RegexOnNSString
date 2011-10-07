@@ -11,11 +11,19 @@
 @implementation NSString (PDRegex)
 
 -(NSString *) stringByReplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement caseInsensitive:(BOOL)ignoreCase {
+    return [self stringByReplacingRegexPattern:regex withString:replacement caseInsensitive:ignoreCase treatAsOneLine:NO];
+}
+
+-(NSString *) stringByReplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement caseInsensitive:(BOOL) ignoreCase treatAsOneLine:(BOOL) assumeMultiLine {
     
     NSUInteger options=0;
     if (ignoreCase) {
         options = options | NSRegularExpressionCaseInsensitive;
     }
+    if (assumeMultiLine) {
+        options = options | NSRegularExpressionDotMatchesLineSeparators;
+    }
+
     NSError *error=nil;
     NSRegularExpression *pattern = [NSRegularExpression regularExpressionWithPattern:regex options:options error:&error];
     if (error) {
