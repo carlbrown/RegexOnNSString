@@ -108,6 +108,22 @@
     
 }
 
+- (void)testMatchBooleanTrue
+{
+    
+    NSString *originalString = @"Unit tests are not implemented yet in RegexOnNSStringIOSExampleTests";
+    
+    STAssertTrue([originalString matchesPatternRegexPattern:@"imp[^t][^t]*Ted" caseInsensitive:YES treatAsOneLine:NO], @"That should have matched");
+}
+
+- (void)testMatchBooleanFalse
+{
+    
+    NSString *originalString = @"Unit tests are not implemented yet in RegexOnNSStringIOSExampleTests";
+    
+    STAssertFalse([originalString matchesPatternRegexPattern:@"imp[^t][^t]*Ted" caseInsensitive:NO treatAsOneLine:NO], @"That should not have matched");
+}
+
 - (void) testPerformance
 {
     NSString *lastTimeString=nil;
