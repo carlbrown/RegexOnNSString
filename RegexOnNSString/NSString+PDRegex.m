@@ -35,6 +35,10 @@
     return retVal;
 }
 
+-(NSString *) stringByReplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement {
+    return [self stringByReplacingRegexPattern:regex withString:replacement caseInsensitive:NO treatAsOneLine:NO];
+}
+
 -(NSArray *) stringsByExtractingGroupsUsingRegexPattern:(NSString *)regex caseInsensitive:(BOOL) ignoreCase treatAsOneLine:(BOOL) assumeMultiLine {
     NSUInteger options=0;
     if (ignoreCase) {
@@ -62,6 +66,10 @@
     return retVal;
 }
 
+-(NSArray *) stringsByExtractingGroupsUsingRegexPattern:(NSString *)regex {
+    return [self stringsByExtractingGroupsUsingRegexPattern:regex caseInsensitive:NO treatAsOneLine:NO];
+}
+
 -(BOOL) matchesPatternRegexPattern:(NSString *)regex caseInsensitive:(BOOL) ignoreCase treatAsOneLine:(BOOL) assumeMultiLine {
     NSUInteger options=0;
     if (ignoreCase) {
@@ -79,6 +87,10 @@
     }
 
     return ([pattern numberOfMatchesInString:self options:0 range:NSMakeRange(0, [self length])] > 0);
+}
+
+-(BOOL) matchesPatternRegexPattern:(NSString *)regex {
+    return [self matchesPatternRegexPattern:regex caseInsensitive:NO treatAsOneLine:NO];
 }
 
 @end
